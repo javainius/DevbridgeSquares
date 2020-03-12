@@ -13,9 +13,9 @@ namespace DevbridgeSquares.Database.Repositories
             _context = new MainContext();
         }
 
-        public void Add(List<PointEntity> points)
+        public void AddPoint(PointEntity point)
         {
-            _context.Points.AddRange(points);
+            _context.Points.Add(point);
             _context.SaveChanges();
         }
         public List<PointEntity> GetPoints() => _context.Points.ToList();

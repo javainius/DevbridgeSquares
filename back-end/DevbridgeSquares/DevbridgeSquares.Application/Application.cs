@@ -7,7 +7,7 @@ using DevbridgeSquares.Logic.AddingLogic;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DevbridgeSquares.Application
+namespace DevbridgeSquares.App
 {
     public class Application
     {
@@ -19,35 +19,18 @@ namespace DevbridgeSquares.Application
         {
             _mapper = new ModelsMapper();
             _pointRepository = new PointRepository();
+            _pointAddingLogic = new PointAddingLogic(_pointRepository.GetPoints());
         }
 
-        public void SetApplication(PointModel point = null, string pointsInString = null)
+        public void AddPoint(PointModel point)
         {
-            _pointAddingLogic = new PointAddingLogic(_pointRepository.GetPoints(), pointsInString, point);
+            _pointAddingLogic.ProcessPoint(point);
+
+            if(_pointAddingLogic.Point.AddingState == PointAddingState.Added)
+            _pointRepository.AddPoint(_mapper.ModelToEntity(_pointAddingLogic.Point));
         }
 
-        public void AddPoint()
-        {
-            _pointAddingLogic.AddOnePoint();
-            _pointRepository.Add(_pointAddingLogic.AddingDbPointList.DbPointList);
-        }
-
-        public void AddPoints()
-        {
-            _pointAddingLogic.AddPoints();
-            _pointRepository.Add(_pointAddingLogic.AddingDbPointList.DbPointList);
-        }
-
-        public List<PointViewModel> GetPointList() => _mapper.EntityListToModelList(_pointRepository.GetPoints());
-        public string GetPointAddingState() => _pointAddingLogic.PointsDTO.Points.FirstOrDefault().AddingState.ToDescriptionString();
-
-        public FileUploadingStateModel GetFileUploadingState()
-        {
-            return new FileUploadingStateModel()
-            {
-                AddingStates = _pointAddingLogic.PointsDTO.Points.Select(point => point.AddingState.ToDescriptionString()).ToList(),
-                UnreadableLinesCount = _pointAddingLogic.PointsDTO.UnreadableLinesCount
-            };
-        }
+        public List<PointViewModel> GetPointList() => _mapper.EntityListToViewModelList(_pointRepository.GetPoints());
+        public string GetPointAddingState() => _pointAddingLogic.Point.AddingState.ToDescriptionString();
     }
 }

@@ -21,7 +21,7 @@ namespace DevbridgeSquares.Logic.Helpers
             DbPointList = new List<PointEntity>();
         }
 
-        public bool DoesPointExist(int? coordinateX, int? coordinateY)
+        public bool DoesPointExist(int coordinateX, int coordinateY)
         {
             return DbPointList.ToList().Exists(point =>
                     point.CoordinateX.Equals(coordinateX) &&

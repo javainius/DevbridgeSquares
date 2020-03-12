@@ -2,42 +2,47 @@
 using DevbridgeSquares.Core.Entities;
 using DevbridgeSquares.Core.Models;
 using DevbridgeSquares.Core.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevbridgeSquares.Core.Mappers
 {
     public class ModelsMapper
     {
-        private IMapper _iMapper { get; set; }
+        private IMapper _iMapperPointEntityToPointView { get; set; }
+        private IMapper _iMapperPointEntityToPointModel { get; set; }
+        private IMapper _iMapperPointModelToPointEntity { get; set; }
+
 
         public ModelsMapper()
         {
-            var config = new MapperConfiguration(cfg => {
+            _iMapperPointEntityToPointView = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<PointEntity, PointViewModel>();
-            });
+            }).CreateMapper();
 
-            _iMapper = config.CreateMapper();
+            _iMapperPointEntityToPointModel = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<PointEntity, PointModel>();
+            }).CreateMapper();
+
+            _iMapperPointModelToPointEntity = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<PointModel, PointEntity>();
+            }).CreateMapper();
         }
 
-        public List<PointViewModel> EntityListToModelList(List<PointEntity> pointEntity) 
+        public List<PointViewModel> EntityListToViewModelList(List<PointEntity> pointEntity)
         {
-            var list = new List<PointViewModel>(); 
-            list.AddRange(pointEntity.Select(point => _iMapper
+            var list = new List<PointViewModel>();
+            list.AddRange(pointEntity.Select(point => _iMapperPointEntityToPointView
             .Map<PointEntity, PointViewModel>(point)));
 
             return list;
         }
-        //public List<PointEntity> ModelToEntityList(PointsModel pointsModel)
-        //{
-        //    var entityList = new List<PointEntity>();
-        //    entityList.AddRange(pointsModel.Points.Select(point => _iMapper
-        //    .Map<PointModel, PointEntity>(point)));
 
-        //    return entityList;
-        //}
+        public PointEntity ModelToEntity(PointModel point) => _iMapperPointModelToPointEntity.Map<PointModel, PointEntity>(point);
+
+        public PointModel EntityToModel(PointEntity point) => _iMapperPointEntityToPointModel.Map<PointEntity, PointModel>(point);
     }
 }
