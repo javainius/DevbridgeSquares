@@ -1,4 +1,5 @@
 ﻿using DevbridgeSquares.Core.Enums;
+using DevbridgeSquares.Core.Interfaces;
 using DevbridgeSquares.Core.Mappers;
 using DevbridgeSquares.Core.Models;
 using DevbridgeSquares.Core.ViewModels;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace DevbridgeSquares.App
 {
-    public class Application
+    public class Application : IApplication
     {
         private PointAddingLogic _pointAddingLogic;
         private PointRepository _pointRepository;

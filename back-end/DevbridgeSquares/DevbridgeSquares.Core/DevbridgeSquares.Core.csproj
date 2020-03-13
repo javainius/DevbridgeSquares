@@ -57,6 +57,7 @@
     <Compile Include="Entities\PointEntity.cs" />
     <Compile Include="Enums\EnumExtensions.cs" />
     <Compile Include="Enums\PointAddingState.cs" />
+    <Compile Include="Interfaces\IApplication.cs" />
     <Compile Include="Mappers\ModelsMapper.cs" />
     <Compile Include="Models\PointModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

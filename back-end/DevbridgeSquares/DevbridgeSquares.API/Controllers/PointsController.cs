@@ -1,4 +1,5 @@
 ﻿using DevbridgeSquares.App;
+using DevbridgeSquares.Core.Interfaces;
 using DevbridgeSquares.Core.Models;
 using DevbridgeSquares.Core.ViewModels;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace DevbridgeSquares.API.Controllers
 {
     public class PointsController : ApiController
     {
-        private readonly Application _application;
-        public PointsController()
+        private readonly IApplication _application;
+        public PointsController(IApplication application)
         {
-            _application = new Application();
+            _application = application;
         }
         // GET api/values/Get
         [HttpGet]

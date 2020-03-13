@@ -1,4 +1,5 @@
 ﻿using DevbridgeSquares.Core.Entities;
+using DevbridgeSquares.Core.Interfaces;
 using DevbridgeSquares.Database.Contexts;
 using System.Collections.Generic;
 using System.Linq;

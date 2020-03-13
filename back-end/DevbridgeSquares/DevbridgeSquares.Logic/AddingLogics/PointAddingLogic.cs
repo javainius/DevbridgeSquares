@@ -18,19 +18,16 @@ namespace DevbridgeSquares.Logic.AddingLogic
         public void ProcessPoint(PointModel point) 
         {
             Point = point;
-            Point.AddingState = GetPointAddingState(point);
+            Point.AddingState = GetPointAddingState();
         } 
 
-        public PointAddingState GetPointAddingState(PointModel point)
+        public PointAddingState GetPointAddingState()
         {
-            int coordinateX = point.CoordinateX;
-            int coordinateY = point.CoordinateY;
-
-            if (_dbPointList.DoesPointExist(coordinateX, coordinateY))
+            if (_dbPointList.DoesPointExist(Point.CoordinateX, Point.CoordinateY))
             {
                 return PointAddingState.Duplicate;
             }
-            else if (!IsCoordinateAvailable(coordinateX) || !IsCoordinateAvailable(coordinateY))
+            else if (!IsCoordinateAvailable(Point.CoordinateX) || !IsCoordinateAvailable(Point.CoordinateY))
             {
                 return PointAddingState.OutOfRange;
             }
