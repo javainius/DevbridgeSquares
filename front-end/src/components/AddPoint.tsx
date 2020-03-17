@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
+import { IButtonProps } from 'office-ui-fabric-react/lib/Button';
 import { TeachingBubble } from 'office-ui-fabric-react/lib/TeachingBubble';
 interface IProps {
   addPoint:(any);
@@ -14,10 +14,8 @@ export interface ITeachingBubbleBasicExampleState {
 
 export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampleState> {
   // private _menuButtonElement: HTMLElement;
-
   constructor(props: IProps) {
     super(props);
-    
     this._onDismiss = this._onDismiss.bind(this);
     this._onShow = this._onShow.bind(this);
 
@@ -47,45 +45,53 @@ export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampl
     };
 
     return (
-      <form onSubmit={this.onSubmit} style={{display: 'flex'}}>
-                <input
-                    type="text"
-                    name="coordinateX"
-                    style={{ flex: '10', padding: '5px' }}
-                    placeholder="X Coordinate"
-                    value={this.state.coordinateX}
-                    onChange={this.onChangeX}
-                />
-                <input
-                    type="text"
-                    name="coordinateY"
-                    style={{ flex: '10', padding: '5px' }}
-                    placeholder="Y Coordinate"
-                    value={this.state.coordinateY}
-                    onChange={this.onChangeY}
-                />
-                <input 
-                    type="submit"
-                    value="Submit"
-                    // className="btn"
-                    onClick={isTeachingBubbleVisible ? this._onDismiss : this._onShow}
-
-                    style={{flex: '1'}}
-                />
-                <div className="ms-TeachingBubbleExample" id="responseMessage">
-                  <span className="ms-TeachingBubbleBasicExample-buttonArea">
-                  </span>
-                    {isTeachingBubbleVisible ? (
-                      <div>
-                        <TeachingBubble 
-                          secondaryButtonProps={exampleSecondaryButtonProps}
-                          onDismiss={this._onDismiss}
-                          headline={this.props.responseMessage}
-                        >
-                        </TeachingBubble>
-                      </div>
-                    ) : null}
+      <form onSubmit={this.onSubmit} className="pointInput">
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputSpan">X and Y Coordinates</span>
+          </div>
+            <input
+                type="text"
+                name="coordinateX"
+                style={{ flex: '10', padding: '5px' }}
+                placeholder="X Coordinate"
+                value={this.state.coordinateX}
+                onChange={this.onChangeX}
+                className="form-control"
+                id="pointInputField"
+            />
+            <input
+                type="text"
+                name="coordinateY"
+                style={{ flex: '10', padding: '5px' }}
+                placeholder="Y Coordinate"
+                value={this.state.coordinateY}
+                onChange={this.onChangeY}
+                className="form-control"
+                id="pointInputField"
+            />
+        </div>
+            <input 
+                type="submit"
+                value="Submit"
+                className="btn-dark"
+                id="btn-dark"
+                onClick={isTeachingBubbleVisible ? this._onDismiss : this._onShow}
+            />
+            <div className="ms-TeachingBubbleExample" id="responseMessage">
+              <span className="ms-TeachingBubbleBasicExample-buttonArea">
+              </span>
+                {isTeachingBubbleVisible ? (
+                  <div>
+                    <TeachingBubble 
+                      secondaryButtonProps={exampleSecondaryButtonProps}
+                      onDismiss={this._onDismiss}
+                      headline={this.props.responseMessage}
+                    >
+                    </TeachingBubble>
                   </div>
+                ) : null}
+            </div>
       </form>
 
       

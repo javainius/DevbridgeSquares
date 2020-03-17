@@ -31,6 +31,7 @@ namespace DevbridgeSquares.App
             _pointRepository.AddPoint(_mapper.ModelToEntity(_pointAddingLogic.Point));
         }
 
+        public void DeletePoints(List<int> idList) => _pointRepository.DeletePoints(idList);
         public List<PointViewModel> GetPointList() => _mapper.EntityListToViewModelList(_pointRepository.GetPoints());
         public string GetPointAddingState() => _pointAddingLogic.Point.AddingState.ToDescriptionString();
     }

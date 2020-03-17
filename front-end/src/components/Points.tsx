@@ -11,31 +11,32 @@ const exampleChildClass = mergeStyles({
   marginBottom: '10px'
 });
 
-export interface IDetailsListBasicExampleItem {
+export interface IDetailsListItem {
   key: number;
   name: string;
   X: number;
   Y: number;
 }
 
-export interface IDetailsListBasicExampleState {
-  items: IDetailsListBasicExampleItem[];
+export interface IDetailsList{
+  items: IDetailsListItem[];
   selectionDetails: string;
 }
 
 interface IPoint {
-    Id: number;
-    CoordinateX: number;
-    CoordinateY: number;
+  Id: number;
+  CoordinateX: number;
+  CoordinateY: number;
 }
   
 interface IPointsProps {
-    points: IPoint[];
+  deletePoints:(any);
+  points: IPoint[];
 }
 
-export class Points extends React.Component<IPointsProps, IDetailsListBasicExampleState> {
+export class Points extends React.Component<IPointsProps, IDetailsList> {
   private _selection: Selection;
-  private _allItems: IDetailsListBasicExampleItem[];
+  private _allItems: IDetailsListItem[];
   private _columns: IColumn[];
 
   constructor(props: IPointsProps) {
@@ -59,26 +60,26 @@ export class Points extends React.Component<IPointsProps, IDetailsListBasicExamp
     };
   }
 	updateState = () => {
-        for (let i = 0; i < this.props.points.length; i++){
-            this._allItems.pop();
-        }
-        for (let i = 0; i < this.props.points.length; i++){
-            this._allItems.push({
-            key: this.props.points[i].Id,
-            name: 'Point ' + i,
-            X: this.props.points[i].CoordinateX,
-            Y: this.props.points[i].CoordinateY
-            });
-        }
+    for (let i = 0; i < this.props.points.length; i++){
+        this._allItems.pop();
+    }
+    for (let i = 0; i < this.props.points.length; i++){
+        this._allItems.push({
+        key: this.props.points[i].Id,
+        name: 'Point ' + i,
+        X: this.props.points[i].CoordinateX,
+        Y: this.props.points[i].CoordinateY
+        });
+    }
   }
   
-
   public render(): JSX.Element {
     this.updateState();
     const { items, selectionDetails } = this.state;
     return (
       <Fabric>
         <div className={exampleChildClass}>{selectionDetails}</div>
+        <button id="deleteButton" onClick={this.deletePointsOnClick}>Delete selected</button>
         <Announced message={selectionDetails} />
         <TextField
           className={exampleChildClass}
@@ -98,7 +99,6 @@ export class Points extends React.Component<IPointsProps, IDetailsListBasicExamp
             ariaLabelForSelectionColumn="Toggle selection"
             ariaLabelForSelectAllCheckbox="Toggle selection for all items"
             checkButtonAriaLabel="Row checkbox"
-            // onItemInvoked={this._onItemInvoked}
           />
         </MarqueeSelection>
       </Fabric>
@@ -112,7 +112,7 @@ export class Points extends React.Component<IPointsProps, IDetailsListBasicExamp
       case 0:
         return 'No items selected';
       case 1:
-        return '1 item selected: ' + (this._selection.getSelection()[0] as IDetailsListBasicExampleItem).name;
+        return '1 item selected: ' + (this._selection.getSelection()[0] as IDetailsListItem).name;
       default:
         return `${selectionCount} items selected`;
     }
@@ -124,7 +124,9 @@ export class Points extends React.Component<IPointsProps, IDetailsListBasicExamp
     });
   };
 
-  // private _onItemInvoked = (item: IDetailsListBasicExampleItem): void => {
-  //   alert(`Item invoked: ${item.name}`);
-  // };
+  private deletePointsOnClick=()=>{
+    let selectedItems = this._selection.getSelection();
+    this.props.deletePoints(selectedItems.map(item => item.key));
+    this._selection.setAllSelected(false);
+  }
 }
