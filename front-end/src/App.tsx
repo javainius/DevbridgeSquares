@@ -3,6 +3,9 @@ import './App.css';
 import axios from 'axios'
 import { Points } from './components/Points';
 import { AddPoint } from './components/AddPoint';
+import { initializeIcons } from '@uifabric/icons';
+
+initializeIcons(undefined, { disableWarnings: true });
 
 class App extends Component {
 state = {

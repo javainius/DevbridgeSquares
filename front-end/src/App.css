@@ -16,7 +16,7 @@
   .pointInput{
     flex-direction: column;
   }
-  #pointInputField, #inputSpan{
+  #pointInputField1, #pointInputField2, #inputSpan{
     margin: 3px;
     border-radius: 3px;
     width: 100%;

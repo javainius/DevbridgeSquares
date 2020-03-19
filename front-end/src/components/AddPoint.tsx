@@ -58,7 +58,7 @@ export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampl
                 value={this.state.coordinateX}
                 onChange={this.onChangeX}
                 className="form-control"
-                id="pointInputField"
+                id="pointInputField1"
             />
             <input
                 type="text"
@@ -68,7 +68,7 @@ export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampl
                 value={this.state.coordinateY}
                 onChange={this.onChangeY}
                 className="form-control"
-                id="pointInputField"
+                id="pointInputField2"
             />
         </div>
             <input 
