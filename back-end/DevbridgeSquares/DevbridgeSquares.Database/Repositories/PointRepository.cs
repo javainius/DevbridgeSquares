@@ -20,9 +20,9 @@ namespace DevbridgeSquares.Database.Repositories
             _context.SaveChanges();
         }
 
-        public void DeletePoints(List<int> idList)
+        public void DeletePoint(int id)
         {
-            _context.Points.RemoveRange(_context.Points.Where(point => idList.Contains(point.Id)));
+            _context.Points.Remove(_context.Points.Where(point => point.Id.Equals(id)).FirstOrDefault());
             _context.SaveChanges();
         }
 

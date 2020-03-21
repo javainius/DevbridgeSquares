@@ -7,6 +7,13 @@ import { initializeIcons } from '@uifabric/icons';
 
 initializeIcons(undefined, { disableWarnings: true });
 
+interface IDetailsListItem {
+  key: number;
+  name: string;
+  X: number;
+  Y: number;
+}
+
 class App extends Component {
 state = {
   points: [],
@@ -21,8 +28,8 @@ componentDidMount() {
   })
 }
 
-deletePoints= (idList: object) => {
-  axios.delete("https://localhost:44368//api/Points/DeletePoints", {data: idList})
+deletePoint= (id: number) => {
+  axios.delete("https://localhost:44368//api/Points/DeletePoint", {data: id})
   .then(res => {
     const points = res.data;
     this.setState({ points });
@@ -52,7 +59,7 @@ addPoint = (point: object) => {
         <h1 className="title">List of points</h1>
         <AddPoint addPoint={this.addPoint} responseMessage={this.state.responseMessage}/>
         <div className="listOfPoints">
-          <Points deletePoints={this.deletePoints} points={this.state.points}/>
+          <Points deletePoint={this.deletePoint} points={this.state.points}/>
         </div>      
       </div>
     );

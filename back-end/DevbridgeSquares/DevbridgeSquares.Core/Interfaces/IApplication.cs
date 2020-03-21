@@ -9,6 +9,6 @@ namespace DevbridgeSquares.Core.Interfaces
         List<PointViewModel> GetPointList();
         void AddPoint(PointModel point);
         string GetPointAddingState();
-        void DeletePoints(List<int> idList);
+        void DeletePoint(int id);
     }
 }

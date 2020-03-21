@@ -8,8 +8,8 @@ interface IProps {
 };
 export interface ITeachingBubbleBasicExampleState {
   isTeachingBubbleVisible?: boolean;
-  coordinateX?: number;
-  coordinateY?: number;
+  coordinateX: number | '';
+  coordinateY: number | '';
 }
 
 export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampleState> {
@@ -20,7 +20,9 @@ export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampl
     this._onShow = this._onShow.bind(this);
 
     this.state = {
-      isTeachingBubbleVisible: false
+      isTeachingBubbleVisible: false,
+      coordinateX: '',
+      coordinateY: ''
     };
   }
 
@@ -31,7 +33,7 @@ export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampl
   onSubmit = (e: any) => {
     e.preventDefault();
     this.props.addPoint(this.state);
-    this.setState({ coordinateX: undefined, coordinateY: undefined});
+    this.setState({ coordinateX: '', coordinateY: ''});
 }
 
   public render(): JSX.Element {
@@ -51,7 +53,7 @@ export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampl
             <span className="input-group-text" id="inputSpan">X and Y Coordinates</span>
           </div>
             <input
-                type="text"
+                type="number"
                 name="coordinateX"
                 style={{ flex: '10', padding: '5px' }}
                 placeholder="X Coordinate"
@@ -61,7 +63,7 @@ export class AddPoint extends React.Component<IProps, ITeachingBubbleBasicExampl
                 id="pointInputField1"
             />
             <input
-                type="text"
+                type="number"
                 name="coordinateY"
                 style={{ flex: '10', padding: '5px' }}
                 placeholder="Y Coordinate"

@@ -17,14 +17,14 @@ namespace DevbridgeSquares.API.Controllers
         {
             _application = application;
         }
-        // GET api/values/Get
+        // GET api/Points/Get
         [HttpGet]
         public List<PointViewModel> GetPoints()
         {
             return _application.GetPointList();
         }
 
-        // POST api/values/PostPoint
+        // POST api/Points/PostPoint
         [HttpPost]
         public PostPointResponseView PostPoint([FromBody] PointModel point)
         {
@@ -33,11 +33,11 @@ namespace DevbridgeSquares.API.Controllers
             return new PostPointResponseView(_application.GetPointAddingState(), _application.GetPointList());
         }
 
-        // POST api/values/DeletePoints
+        // POST api/Points/DeletePoint
         [HttpDelete]
-        public List<PointViewModel> DeletePoints(List<int> idList)
+        public List<PointViewModel> DeletePoint(int id)
         {
-            _application.DeletePoints(idList);
+            _application.DeletePoint(id);
             return _application.GetPointList();
         }
     }

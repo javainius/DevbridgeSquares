@@ -1,52 +1,27 @@
-import React from 'react';
+import * as React from 'react';
+import { IPointItem } from './Points'
 
-interface IPoint {
-    id: number;
-    coordinateX: number;
-    coordinateY: number;
-  };
-  function getStyle() {
-    return {
-        background: '#f4f4f4',
-        padding: '10px',
-        borderBottom: '1px #ccc dotted'
-    }
+interface IPointProps {
+  point: IPointItem
+  deletePoint:(any);
 }
 
-function getdivStyle() {
-  return {
-      display: 'Inline-block',
-      margin: '0px 20px'
+interface IPointState {
+  point: IPointItem
+}
+
+export class PointItem extends React.Component<IPointProps, IPointState> {
+
+deleteOnClick = () =>{
+  this.props.deletePoint(this.props.point.Id);
+}
+  render(){
+    return(
+      <tr>
+        <td style={{verticalAlign: 'middle'}}>{this.props.point.CoordinateX}</td>
+        <td style={{verticalAlign: 'middle'}}>{this.props.point.CoordinateY}</td>
+        <td><button id="deleteButton" onClick={this.deleteOnClick}>Delete</button></td>
+      </tr>
+    );
   }
 }
-
-class PointItem extends React.Component<IPoint> {
-    render(){
-      return( 
-          <div style = {getStyle()}>
-            <div style = {getdivStyle()}>
-              id: {this.props.id} 
-            </div>
-               <div style = {getdivStyle()}>
-                 X: {this.props.coordinateX}
-               </div>
-               <div style = {getdivStyle()}>
-                 Y: {this.props.coordinateY}
-               </div>
-              
-          </div>
-      );
-    }
-  }
-
-const btnStyle = {
-    background: "rgb(147, 28, 28)",
-    color: '#fff',
-    border: 'none',
-    padding: '5px 9px',
-    borderRadius: '50%',
-    cursor: 'pointer',
-    float: 'right'
-}
-
-export default PointItem
