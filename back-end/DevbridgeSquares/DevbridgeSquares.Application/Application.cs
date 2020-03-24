@@ -27,8 +27,8 @@ namespace DevbridgeSquares.App
         {
             _pointAddingLogic.ProcessPoint(point);
 
-            if(_pointAddingLogic.Point.AddingState == PointAddingState.Added)
-            _pointRepository.AddPoint(_mapper.ModelToEntity(_pointAddingLogic.Point));
+            if (_pointAddingLogic.Point.AddingState == PointAddingState.Added)
+                _pointRepository.AddPoint(_mapper.ModelToEntity(_pointAddingLogic.Point));
         }
 
         public void DeletePoint(int id) => _pointRepository.DeletePoint(id);

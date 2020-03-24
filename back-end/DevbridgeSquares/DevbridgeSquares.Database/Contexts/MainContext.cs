@@ -2,20 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DevbridgeSquares.Database.Contexts
 {
     public class MainContext : DbContext
     {
-        private volatile Type _dependency;
         public DbSet<PointEntity> Points { get; set; }
         public MainContext()
-            : base("name = DefaultConnection")
+            : base("data source = (localdb)\\MSSQLLocalDB; Initial Catalog = DevbridgeSquares; integrated security = SSPI")
         {
-            _dependency = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
         }
     }
 }

@@ -17,5 +17,6 @@ namespace DevbridgeSquares.Core.Models
             CoordinateX = coordinateX;
             CoordinateY = coordinateY;
         }
+        public PointModel(){ }
     }
 }

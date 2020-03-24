@@ -1,4 +1,4 @@
-﻿namespace Database.Migrations
+﻿namespace DevbridgeSquares.Database.Migrations
 {
     using System;
     using System.Data.Entity;

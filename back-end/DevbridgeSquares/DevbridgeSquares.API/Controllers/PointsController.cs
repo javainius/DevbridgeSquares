@@ -1,16 +1,14 @@
-﻿using DevbridgeSquares.App;
-using DevbridgeSquares.Core.Interfaces;
+﻿using DevbridgeSquares.Core.Interfaces;
 using DevbridgeSquares.Core.Models;
 using DevbridgeSquares.Core.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace DevbridgeSquares.API.Controllers
 {
-    public class PointsController : ApiController
+    [Route("[controller]")]
+    [ApiController]
+    public class PointsController : ControllerBase
     {
         private readonly IApplication _application;
         public PointsController(IApplication application)
@@ -21,12 +19,13 @@ namespace DevbridgeSquares.API.Controllers
         [HttpGet]
         public List<PointViewModel> GetPoints()
         {
-            return _application.GetPointList();
+            var points = _application.GetPointList();
+            return points;
         }
 
         // POST api/Points/PostPoint
         [HttpPost]
-        public PostPointResponseView PostPoint([FromBody] PointModel point)
+        public PostPointResponseView PostPoint(PointModel point)
         {
             _application.AddPoint(point);
 
@@ -35,7 +34,7 @@ namespace DevbridgeSquares.API.Controllers
 
         // DELETE api/Points/DeletePoint
         [HttpDelete]
-        public List<PointViewModel> DeletePoint([FromBody] int id)
+        public List<PointViewModel> DeletePoint([FromBody]int id)
         {
             _application.DeletePoint(id);
             return _application.GetPointList();
