@@ -33,9 +33,9 @@ namespace DevbridgeSquares.API.Controllers
             return new PostPointResponseView(_application.GetPointAddingState(), _application.GetPointList());
         }
 
-        // POST api/Points/DeletePoint
+        // DELETE api/Points/DeletePoint
         [HttpDelete]
-        public List<PointViewModel> DeletePoint(int id)
+        public List<PointViewModel> DeletePoint([FromBody] int id)
         {
             _application.DeletePoint(id);
             return _application.GetPointList();
