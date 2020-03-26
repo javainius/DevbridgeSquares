@@ -1,9 +1,4 @@
 ﻿using DevbridgeSquares.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevbridgeSquares.Core.Models
 {
@@ -14,9 +9,9 @@ namespace DevbridgeSquares.Core.Models
         public int CoordinateY { get; set; }
         public PointModel(int coordinateX, int coordinateY)
         {
-            CoordinateX = coordinateX;
-            CoordinateY = coordinateY;
+            this.CoordinateX = coordinateX;
+            this.CoordinateY = coordinateY;
         }
-        public PointModel(){ }
+        public PointModel() { }
     }
 }
