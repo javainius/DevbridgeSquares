@@ -31,7 +31,7 @@ namespace DevbridgeSquares.Tests
         public void ProcessPoint_Given_OutOfRangeCoordinateX_PointOutOfRange()
         {
             //Arrange
-            int x = 10001;
+            int x = 5001;
             int y = 2;
             var point = new PointModel(x, y);
             var dbPointList = new List<PointEntity>();
@@ -49,7 +49,7 @@ namespace DevbridgeSquares.Tests
         {
             //Arrange
             int x = 1;
-            int y = 10001;
+            int y = 5001;
             var point = new PointModel(x, y);
             var dbPointList = new List<PointEntity>();
             var pointAddingLogic = new PointAddingLogic(dbPointList);
@@ -65,8 +65,8 @@ namespace DevbridgeSquares.Tests
         public void ProcessPoint_Given_OutOfRangeCoordinates_PointOutOfRange()
         {
             //Arrange
-            int x = -20001;
-            int y = 10001;
+            int x = -5001;
+            int y = 5001;
             var point = new PointModel(x, y);
             var dbPointList = new List<PointEntity>();
             var pointAddingLogic = new PointAddingLogic(dbPointList);
@@ -127,15 +127,3 @@ namespace DevbridgeSquares.Tests
         }
     }
 }
-
-//var points = new List<PointModel>();
-//var validator = new Validator(points);
-//var point = new PointModel()
-//{
-//    X = 1,
-//    Y = 2
-//};
-
-//var output = validator.Validate(point);
-
-//output.Successfull.Should().BeTrue();
