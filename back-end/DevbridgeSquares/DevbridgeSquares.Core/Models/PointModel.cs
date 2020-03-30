@@ -9,8 +9,8 @@ namespace DevbridgeSquares.Core.Models
         public int CoordinateY { get; set; }
         public PointModel(int coordinateX, int coordinateY)
         {
-            this.CoordinateX = coordinateX;
-            this.CoordinateY = coordinateY;
+            CoordinateX = coordinateX;
+            CoordinateY = coordinateY;
         }
         public PointModel() { }
     }
