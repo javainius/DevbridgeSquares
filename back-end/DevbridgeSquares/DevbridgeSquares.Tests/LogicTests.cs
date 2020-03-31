@@ -2,6 +2,7 @@ using DevbridgeSquares.Core.Entities;
 using DevbridgeSquares.Core.Enums;
 using DevbridgeSquares.Core.Models;
 using DevbridgeSquares.Logic.AddingLogic;
+using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace DevbridgeSquares.Tests
             pointAddingLogic.ProcessPoint(point);
 
             //Assert
-            Assert.AreEqual(PointAddingState.Added, pointAddingLogic.Point.AddingState);
+            pointAddingLogic.Point.AddingState.Should().Be(PointAddingState.Added);
         }
 
         [Test]
@@ -41,7 +42,7 @@ namespace DevbridgeSquares.Tests
             pointAddingLogic.ProcessPoint(point);
 
             //Assert
-            Assert.AreEqual(PointAddingState.OutOfRange, pointAddingLogic.Point.AddingState);
+            pointAddingLogic.Point.AddingState.Should().Be(PointAddingState.OutOfRange);
         }
 
         [Test]
@@ -58,7 +59,7 @@ namespace DevbridgeSquares.Tests
             pointAddingLogic.ProcessPoint(point);
 
             //Assert
-            Assert.AreEqual(PointAddingState.OutOfRange, pointAddingLogic.Point.AddingState);
+            pointAddingLogic.Point.AddingState.Should().Be(PointAddingState.OutOfRange);
         }
 
         [Test]
@@ -75,11 +76,11 @@ namespace DevbridgeSquares.Tests
             pointAddingLogic.ProcessPoint(point);
 
             //Assert
-            Assert.AreEqual(PointAddingState.OutOfRange, pointAddingLogic.Point.AddingState);
+            pointAddingLogic.Point.AddingState.Should().Be(PointAddingState.OutOfRange);
         }
 
         [Test]
-        public void ProcessPoint_Given_DuplicatedPoint_PointOutOfRange()
+        public void ProcessPoint_Given_DuplicatedPoint_PointDuplicated()
         {
             //Arrange
             int x = 1;
@@ -97,7 +98,7 @@ namespace DevbridgeSquares.Tests
             pointAddingLogic.ProcessPoint(point);
 
             //Assert
-            Assert.AreEqual(PointAddingState.Duplicate, pointAddingLogic.Point.AddingState);
+            pointAddingLogic.Point.AddingState.Should().Be(PointAddingState.Duplicate);
         }
 
         [Test]
@@ -123,7 +124,7 @@ namespace DevbridgeSquares.Tests
             pointAddingLogic.ProcessPoint(point);
 
             //Assert
-            Assert.AreEqual(PointAddingState.OutOfSpace, pointAddingLogic.Point.AddingState);
+            pointAddingLogic.Point.AddingState.Should().Be(PointAddingState.OutOfSpace);
         }
     }
 }

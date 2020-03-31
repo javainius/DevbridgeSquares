@@ -15,7 +15,7 @@ namespace DevbridgeSquares.API.Controllers
         {
             _application = application;
         }
-        // GET api/Points/Get
+        // GET api/Points
         [HttpGet]
         public List<PointViewModel> GetPoints()
         {
@@ -23,7 +23,7 @@ namespace DevbridgeSquares.API.Controllers
             return points;
         }
 
-        // POST api/Points/PostPoint
+        // POST api/Points
         [HttpPost]
         public PostPointResponseView PostPoint(PointModel point)
         {
@@ -32,7 +32,7 @@ namespace DevbridgeSquares.API.Controllers
             return new PostPointResponseView(_application.GetPointAddingState(), _application.GetPointList());
         }
 
-        // DELETE api/Points/DeletePoint
+        // DELETE api/Points
         [HttpDelete]
         public List<PointViewModel> DeletePoint([FromBody]int id)
         {
