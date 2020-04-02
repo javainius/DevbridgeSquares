@@ -1,8 +1,9 @@
 ﻿using DevbridgeSquares.Core.Enums;
+using System;
 
 namespace DevbridgeSquares.Core.Models
 {
-    public class PointModel
+    public class PointModel : IEquatable<PointModel>
     {
         public PointAddingState AddingState { get; set; }
         public int CoordinateX { get; set; }
@@ -13,5 +14,16 @@ namespace DevbridgeSquares.Core.Models
             CoordinateY = coordinateY;
         }
         public PointModel() { }
+
+        public bool Equals(PointModel other)
+        {
+            if (other is null)
+                return false;
+
+            return CoordinateX == other.CoordinateX && CoordinateY == other.CoordinateY;
+        }
+
+        public override bool Equals(object obj) => Equals(obj as PointModel);
+        public override int GetHashCode() => (CoordinateX, CoordinateY).GetHashCode();
     }
 }

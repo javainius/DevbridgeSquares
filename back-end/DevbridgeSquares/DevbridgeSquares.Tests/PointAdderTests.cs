@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace DevbridgeSquares.Tests
 {
-    public class LogicTests
+    public class PointAdderTests
     {
         [Test]
         public void ProcessPoint_Given_EmptyIntialDbList_PointAdded()
@@ -19,7 +19,7 @@ namespace DevbridgeSquares.Tests
             int y = 2;
             var point = new PointModel(x, y);
             var dbPointList = new List<PointEntity>();
-            var pointAddingLogic = new PointAddingLogic(dbPointList);
+            var pointAddingLogic = new PointAdder(dbPointList);
 
             //Act
             pointAddingLogic.ProcessPoint(point);
@@ -36,7 +36,7 @@ namespace DevbridgeSquares.Tests
             int y = 2;
             var point = new PointModel(x, y);
             var dbPointList = new List<PointEntity>();
-            var pointAddingLogic = new PointAddingLogic(dbPointList);
+            var pointAddingLogic = new PointAdder(dbPointList);
 
             //Act
             pointAddingLogic.ProcessPoint(point);
@@ -53,7 +53,7 @@ namespace DevbridgeSquares.Tests
             int y = 5001;
             var point = new PointModel(x, y);
             var dbPointList = new List<PointEntity>();
-            var pointAddingLogic = new PointAddingLogic(dbPointList);
+            var pointAddingLogic = new PointAdder(dbPointList);
 
             //Act
             pointAddingLogic.ProcessPoint(point);
@@ -70,7 +70,7 @@ namespace DevbridgeSquares.Tests
             int y = 5001;
             var point = new PointModel(x, y);
             var dbPointList = new List<PointEntity>();
-            var pointAddingLogic = new PointAddingLogic(dbPointList);
+            var pointAddingLogic = new PointAdder(dbPointList);
 
             //Act
             pointAddingLogic.ProcessPoint(point);
@@ -92,7 +92,7 @@ namespace DevbridgeSquares.Tests
                 new PointEntity(){ CoordinateX = 1, CoordinateY = 10 },
                 new PointEntity(){ CoordinateX = 3, CoordinateY = 4 },
             };
-            var pointAddingLogic = new PointAddingLogic(dbPointList);
+            var pointAddingLogic = new PointAdder(dbPointList);
 
             //Act
             pointAddingLogic.ProcessPoint(point);
@@ -118,7 +118,7 @@ namespace DevbridgeSquares.Tests
                     CoordinateY = rnd.Next(-10000, 10000) 
                 });
 
-            var pointAddingLogic = new PointAddingLogic(dbPointList);
+            var pointAddingLogic = new PointAdder(dbPointList);
 
             //Act
             pointAddingLogic.ProcessPoint(point);

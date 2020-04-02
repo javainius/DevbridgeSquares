@@ -12,7 +12,7 @@ namespace DevbridgeSquares.App
 {
     public class Application : IApplication
     {
-        private PointAddingLogic _pointAddingLogic;
+        private PointAdder _pointAddingLogic;
         private PointRepository _pointRepository;
         private ModelsMapper _mapper;
 
@@ -20,7 +20,7 @@ namespace DevbridgeSquares.App
         {
             _mapper = new ModelsMapper();
             _pointRepository = new PointRepository();
-            _pointAddingLogic = new PointAddingLogic(_pointRepository.GetPoints());
+            _pointAddingLogic = new PointAdder(_pointRepository.GetPoints());
         }
 
         public void AddPoint(PointModel point)

@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace DevbridgeSquares.Logic.AddingLogic
 {
-    public class PointAddingLogic
+    public class PointAdder
     {
         private DbPointListState _dbPointList;
         public PointModel Point;
-        public PointAddingLogic(List<PointEntity> dbPointList)
+        public PointAdder(List<PointEntity> dbPointList)
         {
             _dbPointList = new DbPointListState(dbPointList);
         }
