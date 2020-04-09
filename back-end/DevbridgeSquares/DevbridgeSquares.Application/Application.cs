@@ -27,6 +27,7 @@ namespace DevbridgeSquares.App
             _pointRepository = new PointRepository();
             _squareRepository = new SquareRepository();
             _pointAdder = new PointAdder(_pointRepository.GetPoints());
+            _squareCalculator = new SquareCalculator(_pointsMapper.EntityListToModelList(_pointRepository.GetPoints()));
         }
 
         public void AddPoint(PointModel point)
@@ -34,20 +35,29 @@ namespace DevbridgeSquares.App
             _pointAdder.ProcessPoint(point);
 
             if (_pointAdder.Point.AddingState == PointAddingState.Added)
+            {
                 _pointRepository.AddPoint(_pointsMapper.ModelToEntity(_pointAdder.Point));
+                UpdateSquares(_pointAdder.Point);
+            }
         }
 
         public void DeletePoint(int id)
         {
-
             var idList = _squareCalculator.GetLostSquaresIds(_squareMapper.EntityListToModelList(_squareRepository.GetSquares()), id);
             _squareRepository.DeleteSquares(idList);
             _pointRepository.DeletePoint(id);
         }
 
         public List<PointView> GetPointList() => _pointsMapper.EntityListToViewModelList(_pointRepository.GetPoints());
+
         public string GetPointAddingState() => _pointAdder.Point.AddingState.ToDescriptionString();
 
         public List<SquareView> GetSquareList() => _squareMapper.EntityListToViewModelList(_squareRepository.GetSquares());
+
+        public void UpdateSquares(PointModel newPoint)
+        {
+            _squareCalculator.Points.Add(_pointAdder.Point);
+            _squareRepository.UpdateSquareRepository(_squareMapper.ModelListToEntitylList(_squareCalculator.GetSquares()));
+        }
     }
 }

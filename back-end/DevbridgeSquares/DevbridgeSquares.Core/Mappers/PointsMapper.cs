@@ -41,6 +41,15 @@ namespace DevbridgeSquares.Core.Mappers
             return list;
         }
 
+        public List<PointModel> EntityListToModelList(List<PointEntity> pointEntity)
+        {
+            var list = new List<PointModel>();
+            list.AddRange(pointEntity.Select(point => _iMapperPointEntityToPointView
+            .Map<PointEntity, PointModel>(point)));
+
+            return list;
+        }
+
         public PointEntity ModelToEntity(PointModel point) => _iMapperPointModelToPointEntity.Map<PointModel, PointEntity>(point);
 
         public PointModel EntityToModel(PointEntity point) => _iMapperPointEntityToPointModel.Map<PointEntity, PointModel>(point);

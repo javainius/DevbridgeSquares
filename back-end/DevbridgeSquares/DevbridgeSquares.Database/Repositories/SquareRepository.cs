@@ -15,15 +15,13 @@ namespace DevbridgeSquares.Database.Repositories
             _context = new MainContext();
         }
 
-        public void AddSquares(List<SquareEntity> squares)
+        public void UpdateSquareRepository(List<SquareEntity> squares)
         {
-            _context.Squares.AddRange(squares);
-            _context.SaveChanges();
-        }
-
-        public void DeleteSquare(int id)
-        {
-            _context.Squares.Remove(_context.Squares.Where(point => point.Id.Equals(id)).FirstOrDefault());
+            _context.Squares.AddRange(squares.Where(newSquare => 
+            _context.Squares.All(oldSquare => oldSquare.Point1 != newSquare.Point1 &&
+                                              oldSquare.Point2 != newSquare.Point2 &&
+                                              oldSquare.Point3 != newSquare.Point3 &&
+                                              oldSquare.Point4 != newSquare.Point4)));
             _context.SaveChanges();
         }
 

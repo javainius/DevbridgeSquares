@@ -24,13 +24,20 @@ namespace DevbridgeSquares.Core.Mappers
 
             _iMapperSquareEntityToSquareModel = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<SquareEntity, SquareModel>();
-                cfg.CreateMap<PointEntity, PointModel>();
+                cfg.CreateMap<SquareEntity, SquareModel>()
+                        .ForMember(dest => dest.Points[0], opt => opt.MapFrom(src => src.Point1))
+                        .ForMember(dest => dest.Points[1], opt => opt.MapFrom(src => src.Point2))
+                        .ForMember(dest => dest.Points[2], opt => opt.MapFrom(src => src.Point3))
+                        .ForMember(dest => dest.Points[3], opt => opt.MapFrom(src => src.Point4));
             }).CreateMapper();
 
             _iMapperSquareModelToSquareEntity = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<SquareModel, SquareEntity>();
+                cfg.CreateMap<SquareModel, SquareEntity>()
+                        .ForMember(dest => dest.Point1, opt => opt.MapFrom(src => src.Points[0]))
+                        .ForMember(dest => dest.Point2, opt => opt.MapFrom(src => src.Points[1]))
+                        .ForMember(dest => dest.Point3, opt => opt.MapFrom(src => src.Points[2]))
+                        .ForMember(dest => dest.Point4, opt => opt.MapFrom(src => src.Points[3]));
             }).CreateMapper();
         }
 
@@ -46,8 +53,17 @@ namespace DevbridgeSquares.Core.Mappers
         public List<SquareModel> EntityListToModelList(List<SquareEntity> squareEntitys)
         {
             var list = new List<SquareModel>();
-            list.AddRange(squareEntitys.Select(square => _iMapperSquareEntityToSquareView
+            list.AddRange(squareEntitys.Select(square => _iMapperSquareEntityToSquareModel
             .Map<SquareEntity, SquareModel>(square)));
+
+            return list;
+        }
+
+        public List<SquareEntity> ModelListToEntitylList(List<SquareModel> squareEntitys)
+        {
+            var list = new List<SquareEntity>();
+            list.AddRange(squareEntitys.Select(square => _iMapperSquareModelToSquareEntity
+            .Map<SquareModel, SquareEntity>(square)));
 
             return list;
         }
