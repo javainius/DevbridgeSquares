@@ -16,8 +16,9 @@ namespace DevbridgeSquares.API.Controllers
             _application = application;
         }
         // GET api/Points
+
         [HttpGet]
-        public List<PointViewModel> GetPoints()
+        public List<PointView> GetPoints()
         {
             var points = _application.GetPointList();
             return points;
@@ -34,7 +35,7 @@ namespace DevbridgeSquares.API.Controllers
 
         // DELETE api/Points
         [HttpDelete]
-        public List<PointViewModel> DeletePoint([FromBody]int id)
+        public List<PointView> DeletePoint([FromBody]int id)
         {
             _application.DeletePoint(id);
             return _application.GetPointList();

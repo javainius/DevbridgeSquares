@@ -6,7 +6,8 @@ namespace DevbridgeSquares.Core.Interfaces
 {
     public interface IApplication
     {
-        List<PointViewModel> GetPointList();
+        List<PointView> GetPointList();
+        List<SquareView> GetSquareList();
         void AddPoint(PointModel point);
         string GetPointAddingState();
         void DeletePoint(int id);

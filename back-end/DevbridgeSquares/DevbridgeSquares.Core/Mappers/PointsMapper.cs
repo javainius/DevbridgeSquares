@@ -7,18 +7,18 @@ using System.Linq;
 
 namespace DevbridgeSquares.Core.Mappers
 {
-    public class ModelsMapper
+    public class PointsMapper
     {
         private IMapper _iMapperPointEntityToPointView { get; set; }
         private IMapper _iMapperPointEntityToPointModel { get; set; }
         private IMapper _iMapperPointModelToPointEntity { get; set; }
 
 
-        public ModelsMapper()
+        public PointsMapper()
         {
             _iMapperPointEntityToPointView = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<PointEntity, PointViewModel>();
+                cfg.CreateMap<PointEntity, PointView>();
             }).CreateMapper();
 
             _iMapperPointEntityToPointModel = new MapperConfiguration(cfg =>
@@ -32,11 +32,11 @@ namespace DevbridgeSquares.Core.Mappers
             }).CreateMapper();
         }
 
-        public List<PointViewModel> EntityListToViewModelList(List<PointEntity> pointEntity)
+        public List<PointView> EntityListToViewModelList(List<PointEntity> pointEntity)
         {
-            var list = new List<PointViewModel>();
+            var list = new List<PointView>();
             list.AddRange(pointEntity.Select(point => _iMapperPointEntityToPointView
-            .Map<PointEntity, PointViewModel>(point)));
+            .Map<PointEntity, PointView>(point)));
 
             return list;
         }

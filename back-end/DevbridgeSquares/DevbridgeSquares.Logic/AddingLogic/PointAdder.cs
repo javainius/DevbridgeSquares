@@ -1,18 +1,18 @@
 ﻿using DevbridgeSquares.Core.Entities;
 using DevbridgeSquares.Core.Enums;
 using DevbridgeSquares.Core.Models;
-using DevbridgeSquares.Logic.Helpers;
+using DevbridgeSquares.Logic.DbItemCopies;
 using System.Collections.Generic;
 
 namespace DevbridgeSquares.Logic.AddingLogic
 {
     public class PointAdder
     {
-        private DbPointListState _dbPointList;
+        private DbPointsCopy _dbPointList;
         public PointModel Point;
         public PointAdder(List<PointEntity> dbPointList)
         {
-            _dbPointList = new DbPointListState(dbPointList);
+            _dbPointList = new DbPointsCopy(dbPointList);
         }
 
         public void ProcessPoint(PointModel point) 

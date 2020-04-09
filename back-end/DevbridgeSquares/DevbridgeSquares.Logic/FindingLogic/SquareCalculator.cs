@@ -36,6 +36,20 @@ namespace DevbridgeSquares.Logic.FindingLogic
             return Squares;
         }
 
+        public List<int> GetLostSquaresIds(List<SquareModel> currentSquareList, int deletedPointId)
+        {
+            var idList = new List<int>();
+            foreach(var square in currentSquareList)
+            {
+                if(square.Points.Select(point => point.Id).Contains(deletedPointId))
+                {
+                    idList.Add(square.Id);
+                }
+            }
+
+            return idList;
+        }
+
         public void ProcessTheLine(PointModel point1, PointModel point2)
         {
             int length = GetLengthBetweenPoints(point1.CoordinateX, point2.CoordinateX);

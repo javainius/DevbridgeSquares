@@ -1,14 +1,13 @@
-﻿using DevbridgeSquares.Core.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
 
 namespace DevbridgeSquares.Core.Models
 {
     public class SquareModel : IEquatable<SquareModel>
     {
         public PointModel[] Points { get; set; }
+        public int Id { get; set; }
+
         public SquareModel() { }
         public SquareModel(PointModel point1,
                            PointModel point2,
@@ -21,6 +20,7 @@ namespace DevbridgeSquares.Core.Models
             Points[2] = point3;
             Points[3] = point4;
         }
+
         public bool Equals(SquareModel other)
         {
             if (other is null)

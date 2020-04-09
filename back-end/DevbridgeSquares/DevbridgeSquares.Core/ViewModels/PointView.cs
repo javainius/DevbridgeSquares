@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevbridgeSquares.Core.ViewModels
 {
-    public class PointViewModel
+    public class PointView
     {
         public int Id { get; set; }
         public int CoordinateX { get; set; }

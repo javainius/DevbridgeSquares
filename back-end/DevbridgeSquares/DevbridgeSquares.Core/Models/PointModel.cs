@@ -8,6 +8,7 @@ namespace DevbridgeSquares.Core.Models
         public PointAddingState AddingState { get; set; }
         public int CoordinateX { get; set; }
         public int CoordinateY { get; set; }
+        public int Id { get; set; }
         public PointModel(int coordinateX, int coordinateY)
         {
             CoordinateX = coordinateX;
@@ -20,7 +21,9 @@ namespace DevbridgeSquares.Core.Models
             if (other is null)
                 return false;
 
-            return CoordinateX == other.CoordinateX && CoordinateY == other.CoordinateY;
+            return CoordinateX == other.CoordinateX &&
+                CoordinateY == other.CoordinateY &&
+                Id == other.Id;
         }
 
         public override bool Equals(object obj) => Equals(obj as PointModel);

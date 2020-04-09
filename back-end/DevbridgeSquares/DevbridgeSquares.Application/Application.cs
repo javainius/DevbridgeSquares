@@ -5,6 +5,7 @@ using DevbridgeSquares.Core.Models;
 using DevbridgeSquares.Core.ViewModels;
 using DevbridgeSquares.Database.Repositories;
 using DevbridgeSquares.Logic.AddingLogic;
+using DevbridgeSquares.Logic.FindingLogic;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,27 +13,41 @@ namespace DevbridgeSquares.App
 {
     public class Application : IApplication
     {
-        private PointAdder _pointAddingLogic;
+        private PointAdder _pointAdder;
         private PointRepository _pointRepository;
-        private ModelsMapper _mapper;
+        private SquareRepository _squareRepository;
+        private PointsMapper _pointsMapper;
+        private SquaresMapper _squareMapper;
+        private SquareCalculator _squareCalculator;
 
         public Application()
         {
-            _mapper = new ModelsMapper();
+            _pointsMapper = new PointsMapper();
+            _squareMapper = new SquaresMapper();
             _pointRepository = new PointRepository();
-            _pointAddingLogic = new PointAdder(_pointRepository.GetPoints());
+            _squareRepository = new SquareRepository();
+            _pointAdder = new PointAdder(_pointRepository.GetPoints());
         }
 
         public void AddPoint(PointModel point)
         {
-            _pointAddingLogic.ProcessPoint(point);
+            _pointAdder.ProcessPoint(point);
 
-            if (_pointAddingLogic.Point.AddingState == PointAddingState.Added)
-                _pointRepository.AddPoint(_mapper.ModelToEntity(_pointAddingLogic.Point));
+            if (_pointAdder.Point.AddingState == PointAddingState.Added)
+                _pointRepository.AddPoint(_pointsMapper.ModelToEntity(_pointAdder.Point));
         }
 
-        public void DeletePoint(int id) => _pointRepository.DeletePoint(id);
-        public List<PointViewModel> GetPointList() => _mapper.EntityListToViewModelList(_pointRepository.GetPoints());
-        public string GetPointAddingState() => _pointAddingLogic.Point.AddingState.ToDescriptionString();
+        public void DeletePoint(int id)
+        {
+
+            var idList = _squareCalculator.GetLostSquaresIds(_squareMapper.EntityListToModelList(_squareRepository.GetSquares()), id);
+            _squareRepository.DeleteSquares(idList);
+            _pointRepository.DeletePoint(id);
+        }
+
+        public List<PointView> GetPointList() => _pointsMapper.EntityListToViewModelList(_pointRepository.GetPoints());
+        public string GetPointAddingState() => _pointAdder.Point.AddingState.ToDescriptionString();
+
+        public List<SquareView> GetSquareList() => _squareMapper.EntityListToViewModelList(_squareRepository.GetSquares());
     }
 }

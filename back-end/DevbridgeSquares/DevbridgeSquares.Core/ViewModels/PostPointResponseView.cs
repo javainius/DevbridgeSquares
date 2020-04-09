@@ -4,9 +4,9 @@ namespace DevbridgeSquares.Core.ViewModels
 {
     public class PostPointResponseView
     {
-        public List<PointViewModel> CurrentPointList { get; set; }
+        public List<PointView> CurrentPointList { get; set; }
         public string AddingState { get; set; }
-        public PostPointResponseView(string addingState, List<PointViewModel> points)
+        public PostPointResponseView(string addingState, List<PointView> points)
         {
             AddingState = addingState;
             CurrentPointList = points;
